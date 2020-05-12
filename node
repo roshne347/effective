@@ -1,0 +1,33 @@
+const express= require('express')
+const app = express();
+
+var mysql = require('mysql')
+
+var connection = mysql.createConnection({
+    host:'localhost',
+    user:'root',
+    password:'',
+    database:'test'
+})
+
+connection.connect()
+
+app.get('/',  (req,res) =>{
+
+    connection.query('SELECT * from students', function (err, rows,fields){
+
+        if(err) throw err
+ 
+        console.log('The solution is: ', rows)
+
+        res.send(rows);
+
+    })
+});
+app.get('/', (req, res) => {
+  res.send('Hello World!')
+});
+
+app.listen(8000, () => {
+  console.log('Example app listening on port 8000!')
+});
