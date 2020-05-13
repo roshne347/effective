@@ -24,9 +24,40 @@ app.get('/',  (req,res) =>{
 
     })
 });
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-});
+
+app.get('/',  (req,res) =>{
+var sql = "INSERT INTO products (id,name,price,availability) VALUES (101,'desktop',200,'no')";
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log("1 record inserted");
+  });
+})
+
+  app.get('/',  (req,res) =>{
+
+       
+                var sql = "UPDATE products SET name = 'scale' WHERE id=123 ";
+                 connection.query(sql, function (err, result) {
+                 if (err) throw err;
+                 console.log(result.affectedRows + " record(s) updated");
+                 console.log(result)
+          });
+            })
+    
+
+
+
+    app.get('/',  (req,res) =>{
+
+       
+                var sql = "DELETE from products where name = 'pen' "
+                 connection.query(sql, function (err, result) {
+                 if (err) throw err;
+                 console.log("removed one entry");
+                 //console.log(result)
+          });
+            })
+    
 
 app.listen(8000, () => {
   console.log('Example app listening on port 8000!')
